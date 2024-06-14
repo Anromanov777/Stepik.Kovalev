@@ -1,6 +1,11 @@
 package Письменные_принадлежности_3;
 
 public class WritingMaterials {
+    {
+        name = "Канцелярская принадлежность";
+        color = "золото";
+    }
+
     String name;
     String color;
     int price;
