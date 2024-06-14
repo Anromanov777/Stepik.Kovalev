@@ -8,7 +8,7 @@ public class Divider extends WritingMaterials {
     String dividerType;
     boolean metal;
 
-    void draw_circle() {
+    static void draw_circle() {
         System.out.println("Нарисован круг");
     }
 
@@ -27,8 +27,10 @@ public class Divider extends WritingMaterials {
     public void setMetal(boolean metal) {
         this.metal = metal;
     }
+
     @Override
     void display() {
-        System.out.print("This is "+this.getClass().getSimpleName()+", Тип циркуля:"+dividerType+", Циркуль из металла?:"+(metal?"да, ":"нет, ")); super.display();
+        System.out.print("This is " + this.getClass().getSimpleName() + ", Тип циркуля:" + dividerType + ", Циркуль из металла?:" + (metal ? "да, " : "нет, "));
+        super.display();
     }
 }
