@@ -1,6 +1,6 @@
 package Письменные_принадлежности_3;
 
-public class Main {
+class Main{
     public static void main(String[] args) {
         WritingMaterials wm = new WritingMaterials("ручка", "Красный", 145, 15.6, true);
         wm.display();

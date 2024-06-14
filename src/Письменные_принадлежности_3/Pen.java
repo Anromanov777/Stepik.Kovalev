@@ -27,4 +27,9 @@ public class Pen extends WritingMaterials {
     public void setAuto(boolean auto) {
         this.auto = auto;
     }
+
+    @Override
+    void display() {
+        System.out.print("This is "+this.getClass().getSimpleName()+", Количество цветов:"+countColor+", Ручка автоматическая:"+(auto?"да, ":"нет, ")); super.display();
+    }
 }

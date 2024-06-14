@@ -27,4 +27,8 @@ public class Divider extends WritingMaterials {
     public void setMetal(boolean metal) {
         this.metal = metal;
     }
+    @Override
+    void display() {
+        System.out.print("This is "+this.getClass().getSimpleName()+", Тип циркуля:"+dividerType+", Циркуль из металла?:"+(metal?"да, ":"нет, ")); super.display();
+    }
 }
