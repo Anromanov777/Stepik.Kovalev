@@ -6,8 +6,9 @@ public class WritingMaterials {
         color = "золото";
         count++;
     }
+
     private static int count;
-    public static String description="Класс канцтоваров";
+    public static String description = "Класс канцтоваров";
     String name;
     String color;
     int price;
@@ -45,9 +46,10 @@ public class WritingMaterials {
     }
 
 
-    static void opisanie(){
+    static void opisanie() {
         System.out.println("Описание");
     }
+
     void display() {
         System.out.println("Название:" + name + ", Цвет:" + color + ", Длина:" + length + ", Цена:" + price + ", Умеет рисовать:" + (draw ? "Да" : "Нет"));
     }

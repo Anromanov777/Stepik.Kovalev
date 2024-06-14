@@ -1,6 +1,6 @@
 package Письменные_принадлежности_3;
 
-public class Ruler extends WritingMaterials {
+public final class Ruler extends WritingMaterials {
     {
         super.draw = false;
     }
