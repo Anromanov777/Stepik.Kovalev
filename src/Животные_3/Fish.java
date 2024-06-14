@@ -1,6 +1,6 @@
 package Животные_3;
 
-public class Fish extends Animal {
+public final class Fish extends Animal {
     {
         super.isSwimm = true;
     }

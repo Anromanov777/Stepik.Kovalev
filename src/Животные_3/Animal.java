@@ -7,7 +7,7 @@ public class Animal {
         count++;
     }
 
-    public static String description = "Это описание класса Животное";
+    public final static String description = "Это описание класса Животное";
     private static int count;
     String type;
     String name;
@@ -46,7 +46,7 @@ public class Animal {
         System.out.println("Тип:" + type + ", Имя:" + name + ", Возраст:" + age + ", Вес:" + weight + ", Умеет летать:" + isFly + ", Умеет ходить:" + isWalk + ", Умеет плавать:" + isSwimm);
     }
 
-    public void rename(String name) {
+    public final void rename(String name) {
         this.name = name;
     }
 
