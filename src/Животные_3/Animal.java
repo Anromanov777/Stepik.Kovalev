@@ -4,9 +4,11 @@ public class Animal {
 
     {
         name = "Безымянное животное";
+        count++;
     }
 
     public static String description = "Это описание класса Животное";
+    private static int count;
     String type;
     String name;
     int age;
@@ -106,5 +108,19 @@ public class Animal {
 
     public void setSwimm(boolean swimm) {
         isSwimm = swimm;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "count="+count+
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", weight=" + weight +
+                ", isFly=" + isFly +
+                ", isWalk=" + isWalk +
+                ", isSwimm=" + isSwimm +
+                '}';
     }
 }
