@@ -31,5 +31,7 @@ class Main{
         System.out.println(d.getDividerType());
         System.out.println(d.isMetal());
         d.draw_circle();
+        System.out.println();
+        System.out.println(d);
     }
 }

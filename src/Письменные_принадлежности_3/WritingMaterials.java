@@ -4,8 +4,10 @@ public class WritingMaterials {
     {
         name = "Канцелярская принадлежность";
         color = "золото";
+        count++;
     }
-
+    private static int count;
+    public static String description="Класс канцтоваров";
     String name;
     String color;
     int price;
@@ -42,6 +44,10 @@ public class WritingMaterials {
         this.draw = draw;
     }
 
+
+    static void opisanie(){
+        System.out.println("Описание");
+    }
     void display() {
         System.out.println("Название:" + name + ", Цвет:" + color + ", Длина:" + length + ", Цена:" + price + ", Умеет рисовать:" + (draw ? "Да" : "Нет"));
     }
@@ -100,5 +106,17 @@ public class WritingMaterials {
 
     public void setDraw(boolean draw) {
         this.draw = draw;
+    }
+
+    @Override
+    public String toString() {
+        return "WritingMaterials{" +
+                "count='" + count + '\'' +
+                "name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", length=" + length +
+                ", draw=" + draw +
+                '}';
     }
 }
