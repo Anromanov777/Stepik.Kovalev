@@ -1,6 +1,6 @@
 package Абстракция_зданий;
 
-public class HighRiseBuilding extends Building{
+public class HighRiseBuilding extends Building implements LivingHouse {
     int etagi;
     boolean parcing;
 
@@ -16,7 +16,17 @@ public class HighRiseBuilding extends Building{
     public String toString() {
         return
                 "etagi=" + etagi +
-                ", parcing=" + parcing +
-                 super.toString();
+                        ", parcing=" + parcing +
+                        super.toString();
+    }
+
+    @Override
+    public void poschitatPeople() {
+        System.out.println(etagi * 4 * 4);
+    }
+
+    @Override
+    public boolean avariinost(int age) {
+        return false;
     }
 }

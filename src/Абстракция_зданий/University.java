@@ -1,6 +1,6 @@
 package Абстракция_зданий;
 
-public class University extends Building{
+public class University extends Building implements SocialHouse {
     int windows;
     int doors;
 
@@ -16,7 +16,17 @@ public class University extends Building{
     public String toString() {
         return
                 "windows=" + windows +
-                ", doors=" + doors +
-                super.toString();
+                        ", doors=" + doors +
+                        super.toString();
+    }
+
+    @Override
+    public boolean fire() {
+        return true;
+    }
+
+    @Override
+    public void kolvoBetona() {
+        System.out.println(windows * doors);
     }
 }

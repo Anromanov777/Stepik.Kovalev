@@ -1,6 +1,6 @@
 package Абстракция_зданий;
 
-public class ShoppingCenter extends Building {
+public class ShoppingCenter extends Building implements SocialHouse{
     int vmestimostMashinNastojnke;
     int square;
     int count;
@@ -23,5 +23,15 @@ public class ShoppingCenter extends Building {
                 ", square=" + square +
                 ", count=" + count +
                 super.toString();
+    }
+
+    @Override
+    public boolean fire() {
+        return true;
+    }
+
+    @Override
+    public void kolvoBetona() {
+        System.out.println("Потрачено много бетона");
     }
 }
