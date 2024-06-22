@@ -26,17 +26,17 @@ public class Zakaz {
         return kovremeni;
     }
 
-    public static void put(List<Zakaz> list, Zakaz z) {
+    public static void put(Zakaz z) {
         if (z.kovremeni) {
-            int a = list.size();
+            int a = ObschiiSpisokZakazov.getZakazList().size();
             for (int i = 1; i < a; i++) {
-                if (!list.get(i).kovremeni) {
-                    list.add(i, z);
+                if (!ObschiiSpisokZakazov.getZakazList().get(i).kovremeni) {
+                    ObschiiSpisokZakazov.getZakazList().add(i, z);
                     return;
                 }
             }
-            list.add(z);
-        } else list.add(z);
+            ObschiiSpisokZakazov.getZakazList().add(z);
+        } else ObschiiSpisokZakazov.getZakazList().add(z);
     }
 
     @Override
