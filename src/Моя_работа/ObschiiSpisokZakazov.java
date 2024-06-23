@@ -15,54 +15,83 @@ public class ObschiiSpisokZakazov {
                 if (!zakazList.isEmpty()) {  //Проверяем не пустой ли список заказов, если не пустой заходим проверить куда вставить данный временной заказ
                     for (int i = 0; i < a; i++) {
                         if (!zakazList.get(i).kovremeni) {   //Если данное место в списке не занято временным, то вставляем сюда и выходим из метода
-                            zakazList.add(zakaz);
+                            zakazList.add(i, zakaz);
                             return;
                         }
                     }
                     zakazList.add(zakaz);   //Если в списке все временные, при выходе добавим в конец этот заказ и выходим из метода
                 } else zakazList.add(zakaz); //Если пустой список, то просто добавляем заказ в этот общий список
-            } else if (SpisokVklPovarovNaRollah.getSize() == 1) {   //Если повар один
-                dobavlenieVspisokPovara(0, zakaz);
+            } else if (SpisokVklPovarovNaRollah.getSize() == 1) {   //Если повар один, то кладем временной в его список
+                dobavlenieVspisokPovara(SpisokVklPovarovNaRollah.getVklpovar().get(0), zakaz);
             } else {   //Если поваров больше, то выбираем повара у которого меньше заказов в списке
-                int indexPovara = minKolvoZakazovuPovara();
-                dobavlenieVspisokPovara(indexPovara, zakaz);
+                Povar povar = minKolvoZakazovuPovara();
+                dobavlenieVspisokPovara(povar, zakaz);
             }
         } else {
             zakazList.add(zakaz);
         }
-    }
+    }   //Добавление заказа
 
     public static List<Zakaz> getZakazList() {
         return zakazList;
     }
 
-    private static int minKolvoZakazovuPovara() { //Индекс повара у которого меньше временных заказов
+    private static Povar minKolvoZakazovuPovara() { //Индекс повара у которого меньше временных заказов
         int a = 1000;
-        int b = -1;
+        Povar b = null;
         for (int i = 0; i < SpisokVklPovarovNaRollah.getSize(); i++) {
             if (SpisokVklPovarovNaRollah.getVklpovar().get(i).getZakazList().size() < a) {
                 a = SpisokVklPovarovNaRollah.getVklpovar().get(i).getZakazList().size();
-                b = i;
+                b = SpisokVklPovarovNaRollah.getVklpovar().get(i);
             }
         }
         return b;
-    }   //Возвращает индекс включенного повара у которого минимальное количество заказов в личном списке
+    }   //Возвращает повара у которого минимальное количество заказов в личном списке
 
-    private static void dobavlenieVspisokPovara(int indexPovara, Zakaz zakaz) {
-        if (SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().isEmpty()) {   //Если пустой список заказов у повара, то просто добавляем
-            SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().add(zakaz);
-        } else if (SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().size() > 1) { //Если заказов в листе больше одного, а второй не временной,
-            if (!SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().get(1).kovremeni) { //то сохраняем сюда
-                SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().add(1, zakaz);
-            } else {
-                int a = SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().size();    //Если второй оказывается временной, то пробегаемся по списку и находим последний не временной
-                for (int i = 1; i < a; i++) {
-                    if (!SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().get(i).kovremeni) {
-                        SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().add(i, zakaz);
+    private static void dobavlenieVspisokPovara(Povar povar, Zakaz zakaz) {
+        if (zakaz.isKovremeni()) {
+            if (povar.getZakazList().size() <= 1) {   //Если пустой список заказов у повара, то просто добавляем
+                povar.getZakazList().add(zakaz);
+            } else if (povar.getZakazList().size() > 1) { //Если заказов в листе больше одного, а второй не временной,
+                if (!povar.getZakazList().get(1).kovremeni) { //то сохраняем сюда
+                    povar.getZakazList().add(1, zakaz);
+                } else if (povar.getZakazList().get(povar.getZakazList().size() - 1).isKovremeni()) {   //Если последний заказ в списке временной, значит все временные, и вставляем заказ в конец.
+                    povar.getZakazList().add(zakaz);
+                } else {
+                    int a = povar.getZakazList().size();    //Если второй оказывается временной, то пробегаемся по списку и находим не временной, вставляем и сразу выходим из цикла
+                    for (int i = 1; i < a; i++) {
+                        if (!povar.getZakazList().get(i).kovremeni) {
+                            povar.getZakazList().add(i, zakaz);
+                            break;
+                        }
                     }
                 }
             }
-        } else
-            SpisokVklPovarovNaRollah.getVklpovar().get(indexPovara).getZakazList().add(zakaz); //Если все временные, то добавляем в конец списка
-    }   //Добавление в список повара временного заказа
+        }else povar.getZakazList().add(zakaz);
+    }   //Добавление заказа в личный список повара
+
+    public static void vipolnenieZakaza(Povar povar) {
+        povar.getZakazList().remove(0);
+        if (povar.getZakazList().size() < povar.maxZakazovVliste && !zakazList.isEmpty()) {
+            dobavlenieVspisokPovara(povar, zakazList.get(0));
+            zakazList.remove(0);
+        }
+    }
+
+    public static void povarZkonchilRabotu(Povar povar) {
+        SpisokVklPovarovNaRollah.getVklpovar().remove(povar);
+        if (SpisokVklPovarovNaRollah.getVklpovar().size() == 0) {
+            for (int i = 0; i < povar.getZakazList().size(); i++) {
+                putZakazList(povar.getZakazList().get(i));
+            }
+        } else if (SpisokVklPovarovNaRollah.getVklpovar().size() == 1) {
+            for (int i = 0; i < povar.getZakazList().size(); i++) {
+                dobavlenieVspisokPovara(SpisokVklPovarovNaRollah.getVklpovar().get(0), povar.getZakazList().get(i));
+            }
+        } else for (int i = 0; i < povar.getZakazList().size(); i++) {
+            Povar povar1 = minKolvoZakazovuPovara();
+            dobavlenieVspisokPovara(povar1, povar.getZakazList().get(i));
+        }
+        povar.getZakazList().clear();
+    }
 }

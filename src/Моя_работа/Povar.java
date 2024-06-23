@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Povar {
     String name;
+    int maxZakazovVliste = 2;   //Количество заказов в личном листе повара. По умолчанию два.
     private List<Zakaz> zakazList;
 
     public Povar(String name) {

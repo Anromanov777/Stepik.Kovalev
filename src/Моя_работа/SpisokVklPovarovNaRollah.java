@@ -12,7 +12,7 @@ public class SpisokVklPovarovNaRollah {
             //добавляем заказы в список повара из общего списка при включении повара
             if (!ObschiiSpisokZakazov.getZakazList().isEmpty()) {
                 try {
-                    for (int i = 0; i < 2; i++) {
+                    for (int i = 0; i < povar.maxZakazovVliste; i++) {
                         if (ObschiiSpisokZakazov.getZakazList().get(0) != null) {
                             povar.getZakazList().add(ObschiiSpisokZakazov.getZakazList().get(0));
                             ObschiiSpisokZakazov.getZakazList().remove(0);
