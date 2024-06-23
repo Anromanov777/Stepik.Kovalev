@@ -30,7 +30,15 @@ public class ObschiiSpisokZakazov {
         } else {
             zakazList.add(zakaz);
         }
-    }   //Добавление заказа
+        //Сделать добавление заказа в личный список повара, если повар уже работает, а заказов не было. Учесть емкость личного списка повара.
+        if (!SpisokVklPovarovNaRollah.getVklpovar().isEmpty()) {
+            Povar povar = minKolvoZakazovuPovara(); //Находим повара с меньшим количеством заказов в списке
+            if (povar.getZakazList().size() < povar.maxZakazovVliste) { //Если количество заказов в списке меньше, чем емкость, то размещаем и удаляем из общего списка
+                dobavlenieVspisokPovara(povar, zakaz);
+                zakazList.remove(zakaz);
+            }
+        }
+    }   //Добавление нового заказа
 
     public static List<Zakaz> getZakazList() {
         return zakazList;
@@ -67,7 +75,7 @@ public class ObschiiSpisokZakazov {
                     }
                 }
             }
-        }else povar.getZakazList().add(zakaz);
+        } else povar.getZakazList().add(zakaz);
     }   //Добавление заказа в личный список повара
 
     public static void vipolnenieZakaza(Povar povar) {
