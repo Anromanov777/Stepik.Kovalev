@@ -7,7 +7,12 @@ public class Zakaz {
     boolean kovremeni;
     boolean samovivoz;
     static int id;
-    int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    private int number;
     Klient klient;
 
     public Zakaz() {
@@ -17,7 +22,7 @@ public class Zakaz {
 
     public Zakaz(boolean kovremeni) {
         ++id;
-        number=id;
+        number = id;
         this.kovremeni = kovremeni;
 
     }
@@ -26,22 +31,9 @@ public class Zakaz {
         return kovremeni;
     }
 
-//    public static void put(Zakaz z) {
-//        if (z.kovremeni) {
-//            int a = ObschiiSpisokZakazov.getZakazList().size();
-//            for (int i = 1; i < a; i++) {
-//                if (!ObschiiSpisokZakazov.getZakazList().get(i).kovremeni) {
-//                    ObschiiSpisokZakazov.getZakazList().add(i, z);
-//                    return;
-//                }
-//            }
-//            ObschiiSpisokZakazov.getZakazList().add(z);
-//        } else ObschiiSpisokZakazov.getZakazList().add(z);
-//    }
-
     @Override
     public String toString() {
         return
-                " zakaz=" + number+" "+kovremeni;
+                " zakaz=" + number + " " + kovremeni;
     }
 }
