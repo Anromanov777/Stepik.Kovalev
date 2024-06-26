@@ -36,7 +36,7 @@ public class SpisokVklPovarovNaRollah {
                 vklpovar.get(0).dobavlenieVspisokPovara(povar.getList().get(i));
             }
         } else for (int i = 0; i < povar.getList().size(); i++) {
-            Povar povar1 =minKolvoZakazovuPovara();
+            Povar povar1 = minKolvoZakazovuPovara();
             povar1.dobavlenieVspisokPovara(povar.getList().get(i));
         }
         povar.getList().clear();
@@ -66,5 +66,13 @@ public class SpisokVklPovarovNaRollah {
         return b;
     }   //Возвращает повара у которого минимальное количество заказов в личном списке
 
-
+    public static Povar getPovar(String name) {
+        Povar povar = null;
+        for (int i = 0; i < vklpovar.size(); i++) {
+            if (vklpovar.get(i).getName().equals(name)) {
+                povar = vklpovar.get(i);
+            }
+        }
+        return povar;
+    }
 }

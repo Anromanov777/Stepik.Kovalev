@@ -43,5 +43,9 @@ public class ObschiiSpisokZakazov {
         return obschiiList;
     }
 
+    public static void zapolnitSpisok(Povar povar){
+
+    }
+
 
 }

@@ -19,6 +19,10 @@ public class Povar {
         return list;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void dobavlenieVspisokPovara(Zakaz zakaz) {
         if (zakaz.isKovremeni()) {
             if (list.size() <= 1) {   //Если пустой список заказов у повара, то просто добавляем
@@ -63,6 +67,14 @@ public class Povar {
             list.remove(zakaz);
         } else
             System.out.println("Вы пытаетесь передать заказ, которого нет в списке");
+
+        for (int i = 0; i < maxZakazovVliste; i++) {    //Наполняем личный список повара заказами из общего списка
+            if (list.size() < maxZakazovVliste && ObschiiSpisokZakazov.getObschiiList().size() > 0) {
+                dobavlenieVspisokPovara(ObschiiSpisokZakazov.getObschiiList().get(0));
+                ObschiiSpisokZakazov.getObschiiList().remove(0);
+            }
+        }
+
     }
 
     @Override
