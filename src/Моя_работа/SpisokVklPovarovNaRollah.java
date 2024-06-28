@@ -9,12 +9,12 @@ public class SpisokVklPovarovNaRollah {
     public static void addVklpovar(Povar povar) {
         if (!vklpovar.contains(povar)) {
             //добавляем заказы в список повара из общего списка при включении повара
-            if (!ObschiiSpisokZakazov.getObschiiList().isEmpty()) {
+            if (!Povar.getObschiiList().isEmpty()) {
                 try {
                     for (int i = 0; i < povar.maxZakazovVliste; i++) {
-                        if (ObschiiSpisokZakazov.getObschiiList().get(0) != null) {
-                            povar.getList().add(ObschiiSpisokZakazov.getObschiiList().get(0));
-                            ObschiiSpisokZakazov.getObschiiList().remove(0);
+                        if (Povar.getObschiiList().get(0) != null) {
+                            povar.getList().add(Povar.getObschiiList().get(0));
+                            Povar.getObschiiList().remove(0);
                         } else break;
                     }
                 } catch (IndexOutOfBoundsException e) {
@@ -23,23 +23,6 @@ public class SpisokVklPovarovNaRollah {
             }
             vklpovar.add(povar);
         }
-    }
-
-    public static void ZakonchilRabotu(Povar povar) {
-        vklpovar.remove(povar);
-        if (vklpovar.size() == 0) {
-            for (int i = 0; i < povar.getList().size(); i++) {
-                ObschiiSpisokZakazov.putZakazList(povar.getList().get(i));
-            }
-        } else if (vklpovar.size() == 1) {
-            for (int i = 0; i < povar.getList().size(); i++) {
-                vklpovar.get(0).dobavlenieVspisokPovara(povar.getList().get(i));
-            }
-        } else for (int i = 0; i < povar.getList().size(); i++) {
-            Povar povar1 = minKolvoZakazovuPovara();
-            povar1.dobavlenieVspisokPovara(povar.getList().get(i));
-        }
-        povar.getList().clear();
     }
 
     public static List<Povar> getVklpovar() {
@@ -58,7 +41,7 @@ public class SpisokVklPovarovNaRollah {
         int a = 1000;
         Povar b = null;
         for (int i = 0; i < vklpovar.size(); i++) {
-            if (vklpovar.get(i).getList().size() < a) {
+            if (vklpovar.get(i).getList().size() < a && vklpovar.get(i).onJob) {
                 a = vklpovar.get(i).getList().size();
                 b = vklpovar.get(i);
             }
